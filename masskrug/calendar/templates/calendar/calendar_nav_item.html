@@ -1,0 +1,25 @@
+
+{% load i18n %}
+    {% if calendar.agendas.all|length > 0 %}
+    <ul>
+      {% for agenda in calendar.agendas.all %}
+      {% if forloop.first %}
+      <li>{{ calendar }}
+      <ul>
+        {% endif %}
+        <li>
+        <a href="" style="background-color:#{{ agenda.color }};">
+          <input type="checkbox" name="agendas[]" value="{{ agenda.pk }}" 
+            checked="checked" />
+          {{ agenda.name }}
+        </a>
+        </li> 
+        {% if forloop.last %}
+      </ul>
+      {% endif %}
+      {% endfor %}
+      </li>
+    </ul>
+    {% else %}
+    <p>{% trans 'No agenda for this calendar' %}</p>
+    {% endif %}

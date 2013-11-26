@@ -1,0 +1,14 @@
+body {
+  margin: 20px;
+}
+#calendar-nav {
+  width: 30%;
+  float: right;
+}
+#calendar {
+  margin-right: 33%;
+  width: 60%;
+}
+
+#calendar-nav ul li {
+}

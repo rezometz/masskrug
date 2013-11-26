@@ -1,0 +1,19 @@
+
+{% load icalendar %}
+
+{% for calendar in calendars %}
+{% for agenda in calendar.agendas.all %}
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//rezo/djangocal /NONSGML v1.0//FR
+{% for event in agenda.events.all %}
+BEGIN:VEVENT
+UID:{{ event.pk}}@{{ agenda.pk }}@{{ calendar.pk }}
+DTSTART:{{ event.start|ical_datetime }}
+DTEND:{{ event.end|ical_datetime }}
+SUMMARY:{{ event }}
+END:VEVENT
+{% endfor %}
+END:VCALENDAR
+{% endfor %}
+{% endfor %}

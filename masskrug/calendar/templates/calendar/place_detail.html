@@ -1,0 +1,15 @@
+{% extends 'calendar/calendar_common.html' %}
+
+{% block calendar_nav %}
+  {% include 'calendar/calendar_nav_item.html' %}
+{% endblock %}
+
+
+{% block javascript %}
+<script type="text/javascript">
+  var calendar_source = {
+    url: '{% url 'place-events-ajax' place_slug=place.slug %}',
+  }
+</script>
+{{ block.super }}
+{% endblock %}
