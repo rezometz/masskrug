@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'masskrug.calendar',
     'colorful',
+    'south',
 )
 
 MIDDLEWARE_CLASSES = (
