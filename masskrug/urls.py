@@ -4,6 +4,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    
+    # Main
+    url(r'^', include('masskrug.mass.urls')),
 
     # MassKrug Calendar
     url(r'^calendar/', include('masskrug.calendar.urls')),
