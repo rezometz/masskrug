@@ -5,11 +5,37 @@ from django.utils.translation import ugettext_lazy as _
 from colorful.fields import RGBColorField
 from mptt.models import MPTTModel, TreeForeignKey
 
+
+class GroupCategory(models.Model):
+  name = models.CharField(
+    _('Name'),
+    max_length=50,
+    unique=True,
+  )
+
+  slug = models.SlugField(
+    _('Slug'),
+  )
+
+  description = models.TextField(
+    _('Description'),
+  )
+
+  def __unicode__(self):
+    return self.name
+
 class Group(MPTTModel):
   name = models.CharField(
     _('Name'),
     max_length=30,
     unique=True,
+  )
+
+  category = models.ForeignKey(
+    GroupCategory,
+    related_name='groups',
+    null=True,
+    blank=True,
   )
 
   slug = models.SlugField(

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Groups' %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-lg-3">
+
+  </div>
+  <div class="col-lg-9">
+    <div class="container-fluid">
+      {% for group in object_list %}
+      <div class="row-fluid">
+        {% if group.icon != '' %}
+        <div class="col-lg-2">
+          <img src="{{ MEDIA_URL }}/{{ group.icon }}" alt="{{ group.name }}" 
+          title="{{ group.name }}" width="120px" />
+        </div>
+        {% endif %}
+        <div class="col-lg-9">
+          <h3>{{ group.name }}
+            {% if group.category != None %}
+            <small>{{ group.category }}</small>
+            {% endif %}
+          </h3>
+          <p class="text-justify">{{ group.description }}</p>
+          <div class="btn-toolbar pull-right">
+            <a href="" class="btn btn-info">{% trans 'More' %}</a>
+            {% if user.is_authenticated %}
+            <a href="" class="btn btn-success">{% trans 'Join this group' %}</a>
+            {% endif %}
+          </div>
+          <div class="clearfix"></div>
+          <hr />
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
