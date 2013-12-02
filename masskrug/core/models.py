@@ -16,6 +16,11 @@ class Group(MPTTModel):
     _('Slug'),
   )
 
+  hidden = models.BooleanField(
+    _('Hidden'),
+    default=False,
+  )
+
   parent = TreeForeignKey(
     'self',
     null=True,
