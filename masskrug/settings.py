@@ -36,10 +36,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'masskrug.core',
     'masskrug.mass',
     'masskrug.calendar',
     'colorful',
     'south',
+    'mptt',
 )
 
 MIDDLEWARE_CLASSES = (

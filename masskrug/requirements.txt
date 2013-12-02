@@ -1,0 +1,11 @@
+Django==1.6
+Pillow==2.2.1
+South==0.8.4
+argparse==1.2.1
+django-colorful==0.1.3
+django-mptt==0.6.0
+icalendar==3.5
+python-dateutil==2.2
+pytz==2013.8
+six==1.4.1
+wsgiref==0.1.2

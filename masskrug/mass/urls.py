@@ -10,5 +10,4 @@ urlpatterns = patterns('',
     name="home",
   ),
 
-
 )

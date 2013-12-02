@@ -22,6 +22,14 @@
           </button>
           <a class="navbar-brand" href="#">MassKrug</a>
         </div>
+        <div class="navbar-collapse navbar-right collapse">
+          <ul class="nav navbar-nav">
+            {% if user.is_authenticated %}
+            {% else %}
+            <li><a href="">{% trans 'Login' %}</a></li>
+            {% endif %}
+          </ul>
+        </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
