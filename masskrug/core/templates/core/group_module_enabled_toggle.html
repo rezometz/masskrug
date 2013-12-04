@@ -1,0 +1,24 @@
+{% extends 'core/group_base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Toggle enabled module' %}{% endblock %}
+
+{% block content-group %}
+<div class="row-fluid">
+  <div class="col-lg-6 col-lg-offset-3 margin-ten">
+    <form method="post" action="{{ request.path }}" class="well">
+      {% csrf_token %}
+      <p>
+      {% blocktrans %}
+      Are you sure that you want to enable/disable the module <b>{{ module }}</b>?
+      {% endblocktrans %}
+      </p>
+      <div class="btn-toolbar pull-right">
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-info">{% trans 'Cancel' %}</a>
+        <input type="submit" class="btn btn-primary" name="toggle" value="{% trans 'Yes' %}" />
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+</div>
+{% endblock %}

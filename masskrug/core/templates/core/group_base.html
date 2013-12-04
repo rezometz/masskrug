@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{{ group }}{% endblock %}
+
+
+{% block content %}
+<ul class="nav nav-tabs">
+  <li class="active"><a href="{% url 'group-home' slug=group.slug %}">{% trans 'Home' %}</a></li>
+  <li><a href="{% url 'group-member-list' slug=group.slug %}">{% trans 'Members' %}</a></li>
+  <li><a href="{% url 'group-module-list' slug=group.slug %}">{% trans 'Settings' %}</a></li>
+</ul>
+
+<div class="container-fluid">
+{% block content-group %}{% endblock %}
+</div>
+
+{% endblock %}

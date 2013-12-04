@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from colorful.fields import RGBColorField
 from mptt.models import MPTTModel, TreeForeignKey
 
+from .modules import module_manager
 
 class GroupCategory(models.Model):
   name = models.CharField(
@@ -82,4 +83,71 @@ class Profile(models.Model):
   groups = models.ManyToManyField(
     Group,
     related_name='users',
+    through='Role',
   )
+
+class GenericRole(models.Model):
+  title = models.CharField(
+    _('Title'),
+    max_length=40,
+  )
+
+  def __unicode__(self):
+    return self.title
+
+class Role(models.Model):
+  title = models.CharField(
+    _('Title'),
+    max_length=40,
+    blank=True
+  )
+  
+  group = models.ForeignKey(
+    Group,
+  )
+  
+  profile = models.ForeignKey(
+    Profile,
+  )
+  
+  generic_role = models.ForeignKey(
+    GenericRole,
+    default=None,
+    null=True,
+    blank=True,
+  )
+
+  enabled = models.BooleanField(
+    _('Enabled'),
+    default=True,
+  )
+
+  accepted = models.BooleanField(
+    _('Valid'),
+    default=False,
+  )
+  
+  def __unicode__(self):
+    return self.title
+
+class Module(models.Model):
+  group = models.ForeignKey(
+    Group,
+    related_name='modules',
+  )
+
+  name = models.CharField(
+    _('Name'),
+    max_length=50,
+  )
+
+  enabled = models.BooleanField(
+    _('Enabled'),
+    default=False,
+  )
+
+  def get_module(self):
+    return module_manager.get(self.name)
+
+  def __unicode__(self):
+    return self.name

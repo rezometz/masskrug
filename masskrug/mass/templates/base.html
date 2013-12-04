@@ -32,7 +32,7 @@
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="">{% trans 'My groups' %}</a></li>
+              <li><a href="{% url 'profile-groups' %}">{% trans 'My groups' %}</a></li>
               <li><a href="">{% trans 'My profile' %}</a></li>
               <li class="divider"></li>
               {% if user.is_staff %} 
@@ -49,13 +49,28 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
-            <li><a href="{% url 'group-list' %}">{% trans 'Groups' %}</a></li>
+            <li class="dropdown">
+            <a href="{% url 'group-list' %}" class="dropdown-toggle" data-toggle="dropdown">
+              {% trans 'Groups' %}
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              {% for group in user.profile.groups.all %}
+              <li><a href="{% url 'group-home' slug=group.slug %}">{{ group }}</a></li>
+              {% endfor %}
+            </ul>
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
     <div class="container">
+      {% if messages %}
+      {% for message in messages %}
+      <p{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</p>
+      {% endfor %}
+      {% endif %}
       {% block content %}{% endblock %}
     </div>  
 

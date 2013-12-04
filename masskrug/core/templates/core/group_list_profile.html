@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'My groups' %}{% endblock %}
+
+{% block content %}
+<p>
+{% blocktrans %}
+All your groups are listed below.
+{% endblocktrans %}
+</p>
+
+{% regroup object_list by category as categories %}
+
+{% for category in categories %}
+<h2>{{ category.grouper }}</h2>
+<ul>
+  {% for group in category.list %}
+  <li>{{ group }}</li>
+  {% endfor %}
+</ul>
+{% empty %}
+<p>
+{% blocktrans %}
+You are not belonging to any group.
+{% endblocktrans %}
+</p>
+{% endfor %}
+
+{% endblock %}

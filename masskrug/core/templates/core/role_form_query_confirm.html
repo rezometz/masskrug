@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% blocktrans %}Join the group {{ group }}{% endblocktrans %}{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+  <div class="col-lg-6 col-lg-offset-3">
+    <form method="post" action="{{ request.path }}" class="well">
+      {% csrf_token %}
+      <p>
+      {% blocktrans %}
+      By clicking the 'Query' button below, a request will be sent to join the group <b>{{ group }}</b>.
+      {% endblocktrans %}
+      </p>
+      <div class="btn-toolbar pull-right">
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-info">{% trans 'Cancel' %}</a>
+        <input type="submit" class="btn btn-primary" name="query" value="{% trans 'Query' %}" />
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+</div>
+{% endblock %}
