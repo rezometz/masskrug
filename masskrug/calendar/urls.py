@@ -3,7 +3,7 @@ from django.conf.urls import patterns, include, url
 
 from .views import EventListAjaxView, CalendarView, MainCalendarView, \
   PlaceCalendarView, PlaceEventListAjaxView, \
-  EventListICSView
+  EventListICSView, CalendarOptionsView
 from .models import Calendar, Event
 
 urlpatterns = patterns('',
@@ -42,4 +42,25 @@ urlpatterns = patterns('',
     EventListICSView.as_view(),
     name="event-list-ics",
   ),
+
+
+  # Module Options
+  url(r'^calendar/(?P<content_type>[\w_]+)/(?P<pk>\d+)$',
+    CalendarOptionsView.as_view(),
+    name="module-calendar-options",
+  ),
+  
+  # Module Calendar
+  url(r'^calendar$',
+    MainCalendarView.as_view(),
+    name="module-calendar",
+  ),
+
+  # Module Planning
+  url(r'^(?P<slug>[\w-]+)/planning$',
+    PlaceCalendarView.as_view(),
+    name="module-calendar-planning",
+  ),
+  
+
 )

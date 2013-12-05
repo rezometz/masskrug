@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<div class="row">
+  <div class="col-lg-9" id="calendar"></div>
+</div>
+
+<script type="text/javascript">
+  {% if calendar %}
+  var url = '{% url 'event-list-ajax' slug=calendar.slug %}';
+  {% else %}
+  var url = '{% url 'event-list-ajax' %}';
+  {% endif %}
+
+  var csrf_token = '{{ csrf_token }}';
+  var default_pks = '{% for 
+</script>

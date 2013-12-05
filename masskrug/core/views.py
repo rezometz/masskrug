@@ -57,6 +57,31 @@ class GroupQueryJoinView(generic.FormView):
 class GroupHomeView(generic.DetailView):
   model = Group
 
+  def get_context_data(self, *args, **kwargs):
+    context = super(GroupHomeView, self).get_context_data(*args, **kwargs)
+
+    self.group = self.get_object()
+
+    context['modules'] = []
+    javascript = []
+    stylesheets = []
+    
+    for key, module in module_manager.modules.items():
+      for view_name, view in module.views.items():
+        context['modules'].append({
+          'template': view.template_name,
+        })
+        context.update(
+          view.get_context_data(self.request, content_object=self.group)
+        )
+        stylesheets += view.Meta.stylesheets
+        javascript += view.Meta.javascript
+
+    context['stylesheets'] = stylesheets
+    context['javascript'] = javascript
+  
+    return context
+
 class GroupMemberListView(generic.ListView):
   model = Role
   template_name = 'core/group_member_list.html'

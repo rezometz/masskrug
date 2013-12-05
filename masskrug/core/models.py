@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.contenttypes.models import ContentType 
 
 from colorful.fields import RGBColorField
 from mptt.models import MPTTModel, TreeForeignKey
@@ -148,6 +149,9 @@ class Module(models.Model):
 
   def get_module(self):
     return module_manager.get(self.name)
+
+  def get_content_type(self):
+    return ContentType.objects.get_for_model(self).model
 
   def __unicode__(self):
     return self.name

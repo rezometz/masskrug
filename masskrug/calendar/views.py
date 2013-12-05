@@ -1,8 +1,14 @@
 from datetime import datetime
 
+
+from django.views import generic
 from django.views.generic import DetailView, ListView
 from django.views.generic.list import BaseListView
 from django.db.models import Q
+from django.contrib.contenttypes.models import ContentType
+from django.forms.models import modelform_factory
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 
 from .mixins import JSONResponseMixin
 from .models import Event, Calendar, Place
@@ -143,3 +149,32 @@ class EventListICSView(ListView):
     response['Content-Type'] = 'text/calendar'
     return response
 
+class CalendarOptionsView(generic.UpdateView):
+  form_class = modelform_factory(Calendar, exclude=('content_type', 'object_id'))
+
+  def get_object(self, *args, **kwargs):
+    content_type = ContentType.objects.get(model=self.kwargs['content_type'])
+    pk = int(self.kwargs['pk'])
+    
+    (self.calendar, created) = Calendar.objects.get_or_create(
+      content_type=content_type,
+      object_id=pk,
+    )
+    
+    return self.calendar
+
+  def get_context_data(self, *args, **kwargs):
+    context = super(CalendarOptionsView, self).get_context_data(*args, **kwargs)
+
+    self.calendar.save()
+    context['object'] = self.calendar.content_type.get_object_for_this_type(pk=self.calendar.object_id).group
+  
+    return context
+
+  def get_success_url(self, *args, **kwargs):
+    
+    messages.success(self.request,
+      _("Calendar module options saved."),
+    )
+    
+    return self.request.get_full_path()

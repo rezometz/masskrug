@@ -1,1 +1,1 @@
-from .modules import module_manager, Module
+from .modules import module_manager, Module, ModuleView, Menu

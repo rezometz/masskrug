@@ -3,6 +3,12 @@ import os, string, importlib
 from django.conf import settings
 from django.template.defaultfilters import slugify
 
+class ModuleView(object):
+  pass
+
+class Menu(object):
+  pass
+
 class Module(object):
   name = ''
   

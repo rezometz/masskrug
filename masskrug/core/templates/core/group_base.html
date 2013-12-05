@@ -2,9 +2,11 @@
 {% load i18n %}
 
 {% block title %}{{ group }}{% endblock %}
-
+{{ object }}
+{{ group }}
 
 {% block content %}
+<h1>{{ group }}</h1>
 <ul class="nav nav-tabs">
   <li class="active"><a href="{% url 'group-home' slug=group.slug %}">{% trans 'Home' %}</a></li>
   <li><a href="{% url 'group-member-list' slug=group.slug %}">{% trans 'Members' %}</a></li>

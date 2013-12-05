@@ -23,8 +23,9 @@
       <td>{{ module.enabled }}</td>
       <td>
         {% if module.enabled %}
-        <a href="{% url module.get_module.settings.url_options object=group %}">{% trans 'Options' %}</a>
+        <a href="{% url module.get_module.settings.url_options content_type=module.get_content_type pk=module.pk %}" class="btn btn-default">{% trans 'Options' %}</a>
         {% endif %}
+      </td>
       <td>
         <a href="{% url 'group-module-enabled-toggle' slug=group.slug module=module.name %}" class="btn btn-success">
           {% if module.enabled %}
@@ -41,6 +42,7 @@
       <td>{{ module.name }}</td>
       <td>{{ module.description }}</td>
       <td>{{ module.enabled }}</td>
+      <td></td>
       <td>
         <a href="{% url 'group-module-enabled-toggle' slug=group.slug module=module.slug %}" class="btn btn-success">
           {% trans 'Enable' %}

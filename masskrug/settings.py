@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'masskrug.core',
     'masskrug.mass',
     'masskrug.calendar',
+    'bootstrapform',
     'colorful',
     'south',
     'mptt',
@@ -91,3 +92,8 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+from django.conf import settings
+
+TEMPLATE_CONTEXT_PROCESSORS = settings.TEMPLATE_CONTEXT_PROCESSORS + (
+  'masskrug.core.context_processors.menus',
+)

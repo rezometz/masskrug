@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^', include('masskrug.mass.urls')),
 
     # MassKrug Calendar
-    url(r'^calendar/', include('masskrug.calendar.urls')),
+    url(r'^module/', include('masskrug.calendar.urls')),
 
     # MassKrug Core
     url(r'^', include('masskrug.core.urls')), 
