@@ -7,23 +7,23 @@ from .views import EventListAjaxView, CalendarView, MainCalendarView, \
 from .models import Calendar, Event
 
 urlpatterns = patterns('',
-  url(r'^$',
+  url(r'^calendar$',
     MainCalendarView.as_view(),
     name="calendar",
   ),
-  
+
   url(r'^(?P<place_slug>[\w-]+)/planning$',
     PlaceCalendarView.as_view(),
     name="place-schedule"
   ),
-  
+
   # Ajax place events
   url(r'^(?P<place_slug>[\w-]+)/events/ajax$',
     PlaceEventListAjaxView.as_view(),
     name="place-events-ajax"
   ),
 
-  
+
   url(r'^(?P<slug>\w+)$',
     CalendarView.as_view(),
     name="calendar",
@@ -49,7 +49,7 @@ urlpatterns = patterns('',
     CalendarOptionsView.as_view(),
     name="module-calendar-options",
   ),
-  
+
   # Module Calendar
   url(r'^calendar$',
     MainCalendarView.as_view(),
@@ -61,6 +61,6 @@ urlpatterns = patterns('',
     PlaceCalendarView.as_view(),
     name="module-calendar-planning",
   ),
-  
+
 
 )
